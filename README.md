@@ -2,10 +2,25 @@
 
 This repository holds the Jupyter Notebook files to do Monte Carlo Simulation on the effectiveness of Social Distancing to prevent COVID-19 infection during the outbreak.
 
+## Setup
+
+### Jupyter Notebook
+
+There are plenty of ways to setup Jupyter Notebook locally. Here's one of them, assuming you already have Python 3.x installed:
+
+1. Setup virtualenv folder to prevent the installation meddles with the libraries in main machine, e.g `python3 -m venv <path_to_virtualenv>`
+2. Activate the virtualenv, e.g. `source <path_to_virtualenv>/bin/activate`
+3. Upgrade pip version, `pip3 install --upgrade pip`
+4. Install the dependencies, `pip3 install -r requirements.txt`
+5. Run Jupyter Notebook locally, `jupyter notebook --port=8888`
+	- This command will allow us to open Jupyter in browser through `localhost:8888`.
+6. After stopping the notebook, deacticate the virtualenv, `deactivate`
+
+
 ## Authors
 
-Ricardo Suranta (rsuranta@andrew.cmu.edu)
-Gaurav Shegokar (gshegoka@andrew.cmu.edu)
+- Ricardo Suranta (rsuranta@andrew.cmu.edu)
+- Gaurav Shegokar (gshegoka@andrew.cmu.edu)
 
 ## License
 
