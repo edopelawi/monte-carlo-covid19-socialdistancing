@@ -1,3 +1,4 @@
+
 from grid import Grid
 
 if __name__ == "__main__":
@@ -23,8 +24,8 @@ if __name__ == "__main__":
         print(f"Performing Evolution: {i+1}")
         if g.is_outbreak_stable():
             print("Outbreak Stable")
-            g.get_current_snapshot()
+            g.print_current_snapshot()
             break
         g.perform_evolution()
-        g.get_current_snapshot()
+        g.print_current_snapshot()
         print("")

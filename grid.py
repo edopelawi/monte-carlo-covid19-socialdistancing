@@ -160,10 +160,19 @@ class Grid:
 
         return False
 
+    def print_current_snapshot(self):
+        """
+        prints the stats for current period.
+        """
+
+        snapshot_dict = self.get_current_snapshot()
+
+        for key in snapshot_dict:
+            print(f"{key}: {snapshot_dict[key]}")            
+
     def get_current_snapshot(self):
         """
-        used to get stats for the current period.
-        TODO: dictionary interface 
+        used to get stats for the current period.        
         """
         no_of_infected_person = 0
         no_of_dead_person = 0
@@ -184,8 +193,9 @@ class Grid:
                 if p.is_immune:
                     no_of_immune_person += 1
 
-        print(f"total_population: {self.population_size}")
-        # print(f"population_count: {population_count}")
-        print(f"no_of_infected_person: {no_of_infected_person}")
-        print(f"no_of_dead_person: {no_of_dead_person}")
-        print(f"no_of_immune_person: {no_of_immune_person}")
+        return {
+            "total_population": self.population_size,
+            "infected_person_count": no_of_infected_person,
+            "dead_person_count": no_of_dead_person,
+            "immune_person_count": no_of_immune_person
+        }
