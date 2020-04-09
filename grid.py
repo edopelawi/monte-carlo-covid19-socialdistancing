@@ -35,6 +35,9 @@ class Grid:
         self.p_death = p_death  # 6% -> 0.06
         self.infection_duration = infection_duration  # 4
 
+        self.dead_persons = []
+
+
         population_indexes = random.sample(
             range(height * width), population_size)
         infected_pop_indexes = random.sample(
@@ -72,6 +75,7 @@ class Grid:
     def perform_evolution(self):
         no_of_peeps = 0
         moved_persons = []
+
         for row in range(self.height):
             for col in range(self.width):
 
@@ -93,13 +97,17 @@ class Grid:
                 # if reaches the max infection duration make a decision to kill a person or make him immune
                 p.check_for_infection_duration()
 
+                # check if the person is dead.
+                # if dead remove from the map 
+                if not p.is_alive:
+                    self.dead_persons.append(p)
+                    self.map[row][col] = None
+                    continue
+
                 ##########################
                 # MOVEMENT RELATED LOGIC #
                 # get the person to move #
                 ##########################
-                if not p.is_alive:
-                    # person is dead LOL cant move him
-                    continue
                 if p.is_stationary:
                     # person is stationary, continue to next person
                     continue
@@ -135,7 +143,7 @@ class Grid:
         return: boolean 
         """
         no_of_infected_person = 0
-        no_of_dead_person = 0
+        no_of_dead_person = len(self.dead_persons)
         no_of_immune_person = 0
         no_of_healthy_person = 0
         population_count = 0
@@ -147,9 +155,7 @@ class Grid:
                 population_count += 1
                 p = self.map[row][col]
 
-                if not p.is_alive:
-                    no_of_dead_person += 1
-                else:
+                if p.is_alive:
                     if p.is_infected:
                         no_of_infected_person += 1
                     else:
@@ -175,7 +181,7 @@ class Grid:
         used to get stats for the current period.        
         """
         no_of_infected_person = 0
-        no_of_dead_person = 0
+        no_of_dead_person = len(self.dead_persons)
         no_of_immune_person = 0
         population_count = 0
 
@@ -186,8 +192,8 @@ class Grid:
                 population_count += 1
                 p = self.map[row][col]
 
-                if not p.is_alive:
-                    no_of_dead_person += 1
+                # if not p.is_alive:
+                #     no_of_dead_person += 1
                 if p.is_alive and p.is_infected:
                     no_of_infected_person += 1
                 if p.is_immune:
