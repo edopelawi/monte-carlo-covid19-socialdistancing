@@ -1,3 +1,5 @@
+# Jupyter Notebook
+
 MANIFEST
 build
 dist
@@ -42,3 +44,6 @@ config.rst
 package-lock.json
 geckodriver.log
 *.iml
+
+# Generated Images
+images/
